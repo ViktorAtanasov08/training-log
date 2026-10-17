@@ -40,13 +40,13 @@ A **commit** records a change locally. A **push** publishes local commits to Git
 The starter has already been published. For a local copy that shares its Git history, clone it into a new folder:
 
 ```sh
-git clone https://github.com/ViktorAtanasov08/literate-octo-system.git TrainingLog-portfolio
+git clone https://github.com/ViktorAtanasov08/training-log.git TrainingLog-portfolio
 cd TrainingLog-portfolio
 git log --oneline
 git status
 ```
 
-This is currently the TrainingLog repository's URL. Its display name in the README is TrainingLog; the repository can be renamed in GitHub settings later.
+The repository is named `training-log`. The clone above shares its published commit history.
 
 The earlier ZIP/local starter has a separate Git history. Keep it as a reference and use the clone above for future pushes.
 
