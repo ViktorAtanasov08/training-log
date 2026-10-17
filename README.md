@@ -1,5 +1,7 @@
 # TrainingLog
 
+[![Build and smoke checks](https://github.com/ViktorAtanasov08/literate-octo-system/actions/workflows/build.yml/badge.svg)](https://github.com/ViktorAtanasov08/literate-octo-system/actions/workflows/build.yml)
+
 **Status: in progress - initial MVC milestone.**
 
 A small workout journal built with C# and ASP.NET Core MVC. This project develops in milestones to practise forms, validation and database-backed applications around strength training.
@@ -36,9 +38,9 @@ The initial app uses the .NET shared framework without extra NuGet packages. No 
 
 ## Verification
 
-The local .NET 10 build passed without warnings. The development environment blocked execution of the rebuilt app, so local end-to-end verification remains incomplete.
+The GitHub Actions workflow builds the app with warnings treated as errors and runs HTTP smoke checks against a fresh instance. [The first run passed](https://github.com/ViktorAtanasov08/literate-octo-system/actions/runs/39038036055).
 
-The GitHub Actions workflow builds the app and runs HTTP smoke checks against a fresh instance: form loading, decimal and zero weights, invalid inputs, HTML escaping and CSRF protection. Check the repository's Actions tab for the actual run result.
+Checks cover page and stylesheet loading, saved entries, decimal and zero weights, rejection of five invalid inputs, HTML escaping and CSRF protection. Browser layout and the planned SQL integration are outside these checks.
 
 To run the same checks yourself, start a fresh app instance using the `http` launch profile, then run `python scripts/smoke.py` in another terminal. The checks add temporary sample entries.
 

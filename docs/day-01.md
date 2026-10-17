@@ -1,63 +1,71 @@
-# ��� 1: ��ࢠ� ����� �����
+# Day 1: Follow one workout entry through the app
 
-���� ���� � �� ࠧ���� ��� ������� �⨣� �� C# � ��� ������� � ������� ���⭮ �� ��࠭�. SQL ��ꧪ�� � ᫥����� ��ꯪ�.
+Goal: understand how input travels from a form to C# and back to the journal. SQL storage comes in the next milestone.
 
-## ����࠭�
+## Run and explore
 
-1. �⢮� TrainingLog.sln �� Visual Studio.
-2. ����� ��䨫� http � ����ࠩ � Ctrl+F5.
-3. ���᭨ Log an exercise � ����� Bench press, 3 �ਨ, 5 ����७��, 100 kg.
-4. ���⠩ ����� ��� ��� � ����� � 0 �ਨ. �ਫ������� ��� �� �� ����૨.
+1. Open `TrainingLog.sln` in Visual Studio with the .NET 10 SDK installed.
+2. Select the `http` profile and run with Ctrl+F5.
+3. Choose **Log an exercise** and save Bench press: 3 sets, 5 reps, 100 kg.
+4. Try an empty exercise name and 0 sets. The server must reject both.
+5. Restart the app. Entries disappear because storage is currently in memory.
 
-## ��� � ������ ������
+## Follow the request
 
-1. Create.cshtml ������� �����.
-2. ������� ����� POST ��� �� Workouts/Create.
-3. MVC �ॢ��� ������ � ����� WorkoutEntry.
-4. ModelState.IsValid �஢�� ���� ������ �⣮����� �� �ࠢ����.
-5. WorkoutLog.Add ������ �������� ����� � ᯨ�ꪠ.
-6. RedirectToAction ���� ����� �� ��ୠ��, ���� ���� � ������� ᯨ�ꪠ.
+1. `Views/Workouts/Create.cshtml` renders the form.
+2. Submitting it sends a POST request to `Workouts/Create`.
+3. MVC binds the form fields to a `WorkoutEntry`.
+4. `ModelState.IsValid` checks binding errors and the model's validation attributes. The controller also rejects future dates.
+5. `WorkoutLog.Add` puts a valid entry in the temporary list.
+6. `RedirectToAction` sends the browser back to the journal.
+7. `Views/Workouts/Index.cshtml` renders the saved entries.
 
-## ����� �� ����� �� ���᭨�
+## Be ready to explain
 
-- ����� �।�⠢�� Exercise, Sets, Reps � WeightKg ��� ᢮��⢠ �� ����?
-- ��� WeightKg � decimal?
-- ��� �஢���� ������ � � C#, ��� HTML ������ �� ���� min � max?
-- ��� ������ � ���� �� ����� � ⠧� �����?
-- ��� GET � POST ��⮤�� Create ���� ࠧ��筨 ஫�?
+- Why is weight a `decimal`?
+- Why validate in C# when the HTML fields already have `min` and `max`?
+- Why do the GET and POST actions have different responsibilities?
+- What does `OrderByDescending` change in the journal?
+- What happens to entries when the application restarts?
+- Why does the POST form include an antiforgery token?
 
-## ����� ��ࢠ �஬ﭠ
+## Your first change
 
-���� ��� ������ �஥��, ������ �� ���� ॠ��� �����: Squat, 3 �ਨ �� 5 ����७��. ��᫥ ����� � ���� �����, ���� ��।��� ।� �� ������. ���᭨ ����� �ࠢ� OrderByDescending, �।� �� �஬���� �஥��.
+Add a second exercise using your own training data. Log an older date and explain why it appears below newer entries. Then read the validation rules and choose one useful change to implement and verify.
 
-## Git � GitHub
+## Git and GitHub
 
-Commit � ������� ᭨��� �� �����襭� �஬ﭠ. Push ��碠 ⥧� commit-� � GitHub. ��碠�� ࠡ��� ���⥯����.
+A **commit** records a change locally. A **push** publishes local commits to GitHub. Commit and push completed changes as you work.
 
-��� ��� ��� ������� Git repository, ࠧ������� ������ �:
+The starter has already been published. For a local copy that shares its Git history, clone it into a new folder:
 
-    git log --oneline
-    git status
+```sh
+git clone https://github.com/ViktorAtanasov08/literate-octo-system.git TrainingLog-portfolio
+cd TrainingLog-portfolio
+git log --oneline
+git status
+```
 
-�� ��ࢮ �㡫��㢠�� �ꧤ�� �ࠧ�� �㡫�筮 repository � GitHub � ��� training-log. �� ������ ��� README �� �ꧤ������. ��᫥ � ������ �� �஥��:
+This is currently the TrainingLog repository's URL. Its display name in the README is TrainingLog; the repository can be renamed in GitHub settings later.
 
-��� ������ �� ࠧ��娢�࠭� ����� ��� Git �����, ��ࢮ ���ꫭ�:
+The earlier ZIP/local starter has a separate Git history. Keep it as a reference and use the clone above for future pushes.
 
-    git init -b main
-    git add .
-    git commit -m "Add initial workout journal with form validation"
+After making and checking a change:
 
-���� ⮢� ��ন �஥�� � �ࠧ��� GitHub repository:
+```sh
+git diff
+git add path/to/the/changed-file
+git diff --cached
+git commit -m "Describe the completed change"
+git push
+```
 
-    git remote add origin https://github.com/ViktorAtanasov08/training-log.git
-    git push -u origin main
+If Git requests sign-in, use the normal Git Credential Manager browser flow.
 
-��� Git ���᪠ �室, ��������� ��ଠ���� ����७ �室 �� Git Credential Manager. �� ���⠢� ��஫� ��� ⮪�� � ����.
+## Automated checks
 
-�� ᫥���� �����襭� �஬ﭠ:
+The Actions workflow builds the app, starts a fresh instance and runs `scripts/smoke.py`. It checks actual HTTP behaviour, including invalid submissions and CSRF protection.
 
-    git add .
-    git commit -m "Describe the completed change"
-    git push
+To run those checks yourself, start a fresh app with the `http` profile, then run `python scripts/smoke.py` in another terminal. They add sample entries to temporary storage.
 
-��ࢮ ���� ����� ������� git diff. ��� commit �ꮡ饭��, ���� ���ᢠ� ����� ����⢨⥫�� � ��⮢�.
+The first scaffold and checks were prepared with AI assistance. Run the app and understand the request flow before presenting this milestone in an interview.
