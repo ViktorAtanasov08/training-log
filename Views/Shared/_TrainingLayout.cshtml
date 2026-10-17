@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - TrainingLog</title>
+    <link rel="stylesheet" href="~/css/training.css" asp-append-version="true" />
+</head>
+<body>
+    <header class="site-header">
+        <nav class="shell" aria-label="Main navigation">
+            <a class="brand" asp-controller="Workouts" asp-action="Index">Training<span>Log</span></a>
+            <a asp-controller="Workouts" asp-action="Index">Journal</a>
+        </nav>
+    </header>
+    <main class="shell content">@RenderBody()</main>
+    <footer class="shell site-footer">Track the work. See the progress.</footer>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

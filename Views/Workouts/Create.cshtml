@@ -1,0 +1,41 @@
+@model WorkoutEntry
+@{
+    ViewData["Title"] = "Log an exercise";
+}
+
+<a class="back-link" asp-action="Index">&larr; Back to journal</a>
+<p class="eyebrow">KEEP SHOWING UP</p>
+<h1>Log an exercise</h1>
+<p class="muted">Record the work you completed. Use 0 kg for exercises without added weight.</p>
+
+<form class="card entry-form" asp-action="Create" method="post">
+    <div asp-validation-summary="All" class="validation" role="alert"></div>
+    <div class="field">
+        <label asp-for="Exercise"></label>
+        <input asp-for="Exercise" placeholder="e.g. Bench press" maxlength="80" required />
+        <span asp-validation-for="Exercise" class="validation"></span>
+    </div>
+    <div class="field">
+        <label asp-for="Date"></label>
+        <input asp-for="Date" max="@DateTime.Today.ToString("yyyy-MM-dd")" required />
+        <span asp-validation-for="Date" class="validation"></span>
+    </div>
+    <div class="form-grid">
+        <div class="field">
+            <label asp-for="Sets"></label>
+            <input asp-for="Sets" min="1" max="20" required />
+            <span asp-validation-for="Sets" class="validation"></span>
+        </div>
+        <div class="field">
+            <label asp-for="Reps"></label>
+            <input asp-for="Reps" min="1" max="100" required />
+            <span asp-validation-for="Reps" class="validation"></span>
+        </div>
+        <div class="field">
+            <label asp-for="WeightKg"></label>
+            <input asp-for="WeightKg" type="number" min="0" max="1000" step="0.01" required />
+            <span asp-validation-for="WeightKg" class="validation"></span>
+        </div>
+    </div>
+    <button class="button" type="submit">Save entry</button>
+</form>
