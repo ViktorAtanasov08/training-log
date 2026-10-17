@@ -1,6 +1,6 @@
 # TrainingLog
 
-[![Build and smoke checks](https://github.com/ViktorAtanasov08/literate-octo-system/actions/workflows/build.yml/badge.svg)](https://github.com/ViktorAtanasov08/literate-octo-system/actions/workflows/build.yml)
+[![Build and smoke checks](https://github.com/ViktorAtanasov08/training-log/actions/workflows/build.yml/badge.svg)](https://github.com/ViktorAtanasov08/training-log/actions/workflows/build.yml)
 
 **Status: in progress - initial MVC milestone.**
 
@@ -38,7 +38,7 @@ The initial app uses the .NET shared framework without extra NuGet packages. No 
 
 ## Verification
 
-The GitHub Actions workflow builds the app with warnings treated as errors and runs HTTP smoke checks against a fresh instance. [The first run passed](https://github.com/ViktorAtanasov08/literate-octo-system/actions/runs/39038036055).
+The GitHub Actions workflow builds the app with warnings treated as errors and runs HTTP smoke checks against a fresh instance. [The first run passed](https://github.com/ViktorAtanasov08/training-log/actions/runs/39038036055).
 
 Checks cover page and stylesheet loading, saved entries, decimal and zero weights, rejection of five invalid inputs, HTML escaping and CSRF protection. Browser layout and the planned SQL integration are outside these checks.
 
