@@ -1,0 +1,13 @@
+@model WorkoutEntry
+@{ ViewData["Title"] = "Delete exercise"; }
+<a class="back-link" asp-action="Index">&larr; Back to journal</a>
+<h1>Delete this entry?</h1>
+<section class="card">
+    <p><strong>@Model.Exercise</strong> — @Model.Date.ToString("dd MMM yyyy")</p>
+    <p>@Model.Sets sets × @Model.Reps reps at @Model.WeightKg.ToString("0.##") kg</p>
+    <p>This removes the entry permanently.</p>
+    <form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+        <button class="button" type="submit">Delete entry</button>
+        <a asp-action="Index">Keep entry</a>
+    </form>
+</section>
