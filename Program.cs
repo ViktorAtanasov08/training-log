@@ -5,7 +5,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddSingleton<WorkoutLog>();
+var databasePath = builder.Configuration["Database:Path"]
+    ?? Path.Combine(builder.Environment.ContentRootPath, "data", "training.db");
+builder.Services.AddSingleton(new WorkoutLog(databasePath));
 // Keep this local prototype's form-protection keys outside source control.
 builder.Services.AddDataProtection().PersistKeysToFileSystem(
     new DirectoryInfo(Path.Combine(builder.Environment.ContentRootPath, ".local-keys")));

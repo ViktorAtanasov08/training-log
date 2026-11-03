@@ -1,14 +1,16 @@
 @model WorkoutEntry
 @{
-    ViewData["Title"] = "Log an exercise";
+    var editing = ViewContext.RouteData.Values["action"]?.ToString() == "Edit";
+    ViewData["Title"] = editing ? "Edit exercise" : "Log an exercise";
 }
 
 <a class="back-link" asp-action="Index">&larr; Back to journal</a>
 <p class="eyebrow">KEEP SHOWING UP</p>
-<h1>Log an exercise</h1>
+<h1>@ViewData["Title"]</h1>
 <p class="muted">Record the work you completed. Use 0 kg for exercises without added weight.</p>
 
-<form class="card entry-form" asp-action="Create" method="post">
+<form class="card entry-form" asp-action="@(editing ? "Edit" : "Create")" asp-route-id="@(editing ? Model.Id : (int?)null)" method="post">
+    @if (editing) { <input asp-for="Id" type="hidden" /> }
     <div asp-validation-summary="All" class="validation" role="alert"></div>
     <div class="field">
         <label asp-for="Exercise"></label>

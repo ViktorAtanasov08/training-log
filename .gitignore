@@ -9,3 +9,8 @@ appsettings.Local.json
 .env
 .local-keys/
 wwwroot/lib/
+data/
+*.db
+*.db-shm
+*.db-wal
+*.db-journal
